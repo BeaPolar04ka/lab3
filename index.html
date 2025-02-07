@@ -1,0 +1,53 @@
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Найспекотніший день</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Дані про температуру</h2>
+    <table id="temperature-table">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Температура (°C)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>2024-02-01</td><td>5</td></tr>
+            <tr><td>2024-02-02</td><td>8</td></tr>
+            <tr><td>2024-02-03</td><td>12</td></tr>
+            <tr><td>2024-02-04</td><td>15</td></tr>
+            <tr><td>2024-02-05</td><td>10</td></tr>
+            <tr><td>2024-02-06</td><td>14</td></tr>
+        </tbody>
+    </table>
+    
+    <button id="find-hottest">Знайти найспекотніший день</button>
+    
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#find-hottest").click(function () {
+                let maxTemp = -Infinity;
+                let maxDate = "";
+
+                $("#temperature-table tbody tr").each(function () {
+                    let date = $(this).find("td:first").text();
+                    let temp = parseInt($(this).find("td:last").text());
+
+                    if (temp > maxTemp) {
+                        maxTemp = temp;
+                        maxDate = date;
+                    }
+                });
+
+                $("#result").html(`<p>🌡️ Найспекотніший день: <strong>${maxDate}</strong> (${maxTemp}°C)</p>`);
+            });
+        });
+    </script>
+</body>
+</html>
